@@ -1,0 +1,9 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://0.0.0.0:5432/customers_db?currentSchema=customers_user
+    username: customers_apps
+    password: customers_apps
+
+logging:
+  level:
+    com.fabiankevin.app: DEBUG

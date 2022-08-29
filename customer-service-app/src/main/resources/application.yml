@@ -1,0 +1,9 @@
+spring:
+  profiles:
+    active:
+      - local
+  autoconfigure:
+    exclude:
+      - org.springframework.boot.autoconfigure.r2dbc.R2dbcAutoConfiguration
+  jackson:
+    property-naming-strategy: SNAKE_CASE
