@@ -7,3 +7,17 @@ spring:
       - org.springframework.boot.autoconfigure.r2dbc.R2dbcAutoConfiguration
   jackson:
     property-naming-strategy: SNAKE_CASE
+
+application:
+  common:
+    error-responses:
+      FALLBACK:
+        message: Sorry, Something went wrong while we were processing your request. please try again
+        status: 500
+      CUSTOMER_NOT_FOUND_EXCEPTION:
+        message: Customer not found
+        status: 404
+      CUSTOMER_EXISTS_EXCEPTION:
+        message: Customer already exists
+        status: 404
+        code: CUSCUS400

@@ -6,6 +6,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.util.UUID;
 
@@ -15,10 +17,20 @@ import java.util.UUID;
 @NoArgsConstructor
 public class CreateCustomerRequestDto {
     private UUID id;
+
+    @NotEmpty
+    @NotNull
     private String firstName;
+    @NotEmpty
+    @NotNull
     private String lastName;
+    @NotNull
     private LocalDate birthDate;
+    @NotEmpty
+    @NotNull
     private String mobileNumber;
+    @NotEmpty(message = "email cannot be empty")
+    @NotNull(message = "email is missing")
     private String email;
 
 

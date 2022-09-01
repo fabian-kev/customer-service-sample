@@ -7,6 +7,7 @@ import com.fabiankevin.app.service.CustomerService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.MDC;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.UUID;
@@ -23,10 +24,10 @@ public class CustomerController {
     @PostMapping
     public CustomerResponseDto create(
             @RequestHeader(HEADER_RRN) String rrn,
-            @RequestBody CreateCustomerRequestDto request) {
+            @Validated @RequestBody CreateCustomerRequestDto request) {
         try {
             MDC.put("RRN", rrn);
-            log.debug("Receive request={}",request);
+            log.debug("Receive request={}", request);
             Customer customer = CreateCustomerRequestDto
                     .toDomain(request);
             customer = customer.toBuilder()

@@ -6,6 +6,7 @@ import com.fabiankevin.app.exception.CustomerNotFound;
 import com.fabiankevin.app.repository.CustomerRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.UUID;
@@ -18,16 +19,20 @@ public class DefaultCustomerService implements CustomerService {
     public Customer create(Customer customer) {
 
         customerRepository.findByMobileAndEmail(customer.getMobileNumber(), customer.getEmail())
-                .ifPresent(c -> { throw new CustomerExistsException();
+                .ifPresent(c -> { throw new CustomerExistsException(String.format("Customer with mobileNumber=%s and email=%s already exists", customer.getMobileNumber(), customer.getEmail()));
                 });
-
+        log.info("Inserting customer mobileNumber={}, email={}, lastName={}, firstName={}, ",
+                customer.getMobileNumber(),
+                customer.getEmail(),
+                customer.getFirstName(),
+                customer.getLastName());
         return customerRepository.create(customer);
     }
 
     @Override
     public Customer getById(UUID id) {
         return customerRepository.findById(id)
-                .orElseThrow(CustomerNotFound::new);
+                .orElseThrow(() -> new CustomerNotFound(HttpStatus.NOT_FOUND, String.format("Customer with id=%s not found", id), "CUSCUS404"));
     }
 
     @Override
