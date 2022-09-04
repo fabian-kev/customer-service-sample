@@ -19,6 +19,7 @@
     <modules>
         <module>customer-service-data</module>
         <module>customer-service-app</module>
+        <module>customer-service-data-jpa</module>
     </modules>
 
     <properties>
@@ -31,6 +32,11 @@
             <dependency>
                 <groupId>com.fabiankevin</groupId>
                 <artifactId>customer-service-data</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.fabiankevin</groupId>
+                <artifactId>customer-service-data-jpa</artifactId>
                 <version>${project.version}</version>
             </dependency>
         </dependencies>

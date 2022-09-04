@@ -10,5 +10,4 @@ public interface CustomerRepository {
     Customer update(Customer customer, UUID customerId);
     Optional<Customer> findById(UUID id);
     Optional<Customer> findByMobileAndEmail(String mobileNumber, String email);
-
 }

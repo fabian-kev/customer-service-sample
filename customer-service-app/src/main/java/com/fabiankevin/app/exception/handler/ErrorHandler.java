@@ -2,6 +2,7 @@ package com.fabiankevin.app.exception.handler;
 
 import com.fabiankevin.app.exception.CustomerException;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,6 +15,7 @@ import java.util.stream.Collectors;
 
 @ControllerAdvice
 @RequiredArgsConstructor
+@Slf4j
 public class ErrorHandler {
 
     private final ErrorResponseResolver errorResponseResolver;
@@ -27,6 +29,7 @@ public class ErrorHandler {
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ErrorResponse> handleCustomerExceptions(Exception e){
+        log.error("handleCustomerExceptions ", e);
         ErrorResponse resolve = errorResponseResolver.resolve(new RuntimeException());
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                 .body(resolve);

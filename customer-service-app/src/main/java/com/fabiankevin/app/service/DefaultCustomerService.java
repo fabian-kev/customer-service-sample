@@ -2,7 +2,7 @@ package com.fabiankevin.app.service;
 
 import com.fabiankevin.app.domain.Customer;
 import com.fabiankevin.app.exception.CustomerExistsException;
-import com.fabiankevin.app.exception.CustomerNotFound;
+import com.fabiankevin.app.exception.CustomerNotFoundException;
 import com.fabiankevin.app.repository.CustomerRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -32,7 +32,7 @@ public class DefaultCustomerService implements CustomerService {
     @Override
     public Customer getById(UUID id) {
         return customerRepository.findById(id)
-                .orElseThrow(() -> new CustomerNotFound(HttpStatus.NOT_FOUND, String.format("Customer with id=%s not found", id), "CUSCUS404"));
+                .orElseThrow(() -> new CustomerNotFoundException(HttpStatus.NOT_FOUND, String.format("Customer with id=%s not found", id), "CUSCUS404"));
     }
 
     @Override
